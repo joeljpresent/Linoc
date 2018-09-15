@@ -19,12 +19,19 @@ public class LinocSwapper
      */
     final private HashMap<Color, Color> mappings;
     final private BufferedImage srcImg;
+    final private BufferedImage destImg;
 
     public LinocSwapper(HashMap<Color, Color> mappings, File sourceImage)
             throws IOException
     {
         this.mappings = mappings;
         this.srcImg = ImageIO.read(sourceImage);
+        this.destImg = newImageWithDimensionsOf(this.srcImg);
     }
 
+    private static BufferedImage newImageWithDimensionsOf(BufferedImage img)
+    {
+        return new BufferedImage(img.getWidth(), img.getHeight(),
+                img.getType());
+    }
 }
