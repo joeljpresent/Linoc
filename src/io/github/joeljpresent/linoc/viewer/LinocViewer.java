@@ -1,5 +1,7 @@
 package io.github.joeljpresent.linoc.viewer;
 
+import io.github.joeljpresent.linoc.swapper.LinocSwapper;
+
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 
@@ -9,11 +11,11 @@ public class LinocViewer
     private BufferedImage src;
     private BufferedImage dest;
 
-    public LinocViewer(BufferedImage source, BufferedImage destination)
+    public LinocViewer(LinocSwapper swapper)
     {
         this.frame = new JFrame("Linoc Viewer");
-        this.src = source;
-        this.dest = destination;
+        this.src = swapper.getSourceImage();
+        this.dest = swapper.getDestinationImage();
     }
 
     public void open()

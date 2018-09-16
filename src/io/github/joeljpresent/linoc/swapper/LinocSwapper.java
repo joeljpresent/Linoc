@@ -1,13 +1,9 @@
 package io.github.joeljpresent.linoc.swapper;
 
-import io.github.joeljpresent.linoc.exceptions.ColorAlreadyPresentException;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Perform color-swapping.
@@ -15,23 +11,43 @@ import java.util.HashMap;
 public class LinocSwapper
 {
     /**
-     * Mappings of source colors to destination colors.
+     * LinocMappings of source colors to destination colors.
      */
-    final private HashMap<Color, Color> mappings;
+    final private LinocMappings mappings;
     final private BufferedImage srcImg;
     final private BufferedImage destImg;
 
-    public LinocSwapper(HashMap<Color, Color> mappings, File sourceImage)
-            throws IOException
+    public LinocSwapper(LinocMappings mappings, BufferedImage sourceImage)
     {
         this.mappings = mappings;
-        this.srcImg = ImageIO.read(sourceImage);
+        this.srcImg = sourceImage;
         this.destImg = newImageWithDimensionsOf(this.srcImg);
+    }
+
+    public LinocSwapper(LinocMappings mappings, File sourceImage)
+            throws IOException
+    {
+        this(mappings, ImageIO.read(sourceImage));
     }
 
     private static BufferedImage newImageWithDimensionsOf(BufferedImage img)
     {
         return new BufferedImage(img.getWidth(), img.getHeight(),
                 img.getType());
+    }
+
+    public BufferedImage getSourceImage()
+    {
+        return srcImg;
+    }
+
+    public BufferedImage getDestinationImage()
+    {
+        return destImg;
+    }
+
+    public LinocMappings getMappings()
+    {
+        return mappings;
     }
 }
