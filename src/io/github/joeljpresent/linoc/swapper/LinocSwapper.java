@@ -3,6 +3,7 @@ package io.github.joeljpresent.linoc.swapper;
 import io.github.joeljpresent.linoc.viewer.LinocViewer;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,27 @@ public class LinocSwapper
             throws IOException
     {
         this(mappings, ImageIO.read(sourceImage));
+    }
+
+    public BufferedImage swap()
+    {
+        for (int x = 0; x < srcImg.getWidth(); x++)
+        {
+            for (int y = 0; y < srcImg.getHeight(); y++)
+            {
+                swapPixel(x,y);
+            }
+        }
+        return destImg;
+    }
+
+    private void swapPixel(int x, int y)
+    {
+        Color sourceColor = new Color(srcImg.getRGB(x, y));
+        if (mappings.containsKey(sourceColor))
+            destImg.setRGB(x, y, mappings.get(sourceColor).getRGB());
+        else
+            destImg.setRGB(x, y, sourceColor.getRGB());
     }
 
     public void view()
