@@ -33,7 +33,21 @@ public class LinocSwapper
         this(mappings, ImageIO.read(sourceImage));
     }
 
-    public BufferedImage swap()
+    public static LinocSwapper
+    swap(LinocMappings mappings, BufferedImage sourceImage)
+    {
+        LinocSwapper swapper = new LinocSwapper(mappings, sourceImage);
+        swapper.swap();
+        return swapper;
+    }
+
+    public static LinocSwapper swap(LinocMappings mappings, File sourceImage)
+            throws IOException
+    {
+        return LinocSwapper.swap(mappings, ImageIO.read(sourceImage));
+    }
+
+    public LinocSwapper swap()
     {
         for (int x = 0; x < srcImg.getWidth(); x++)
         {
@@ -42,7 +56,7 @@ public class LinocSwapper
                 swapPixel(x,y);
             }
         }
-        return destImg;
+        return this;
     }
 
     private void swapPixel(int x, int y)
@@ -54,10 +68,11 @@ public class LinocSwapper
             destImg.setRGB(x, y, sourceColor.getRGB());
     }
 
-    public void view()
+    public LinocSwapper view()
     {
         LinocViewer viewer = new LinocViewer(this);
         viewer.open();
+        return this;
     }
 
     private static BufferedImage newImageWithDimensionsOf(BufferedImage img)
