@@ -27,6 +27,7 @@ public class LinocViewer
     {
         this.frame.setSize(640, 480);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setContentPane(new ImageComparisonPanel());
         this.frame.setVisible(true);
     }
 

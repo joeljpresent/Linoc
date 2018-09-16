@@ -1,5 +1,7 @@
 package io.github.joeljpresent.linoc.swapper;
 
+import io.github.joeljpresent.linoc.viewer.LinocViewer;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,6 +30,12 @@ public class LinocSwapper
             throws IOException
     {
         this(mappings, ImageIO.read(sourceImage));
+    }
+
+    public void view()
+    {
+        LinocViewer viewer = new LinocViewer(this);
+        viewer.open();
     }
 
     private static BufferedImage newImageWithDimensionsOf(BufferedImage img)
