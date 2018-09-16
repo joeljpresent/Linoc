@@ -75,6 +75,48 @@ public class LinocSwapper
         return this;
     }
 
+    private void save(String formatName, File output) throws IOException
+    {
+        ImageIO.write(destImg, formatName, output);
+    }
+
+    public LinocSwapper saveAsPng(File output) throws IOException
+    {
+        save("png", output);
+        return this;
+    }
+
+    public LinocSwapper saveAsPng(String output) throws IOException
+    {
+        save("png", new File(output));
+        return this;
+    }
+
+    public LinocSwapper saveAsGif(File output) throws IOException
+    {
+        save("gif", output);
+        return this;
+    }
+
+    public LinocSwapper saveAsGif(String output) throws IOException
+    {
+        save("gif", new File(output));
+        return this;
+    }
+
+    public LinocSwapper saveAsJpeg(File output) throws IOException
+    {
+        save("jpg", output);
+        return this;
+    }
+
+    public LinocSwapper saveAsJpeg(String output) throws IOException
+    {
+        save("jpg", new File(output));
+        return this;
+    }
+
+
     private static BufferedImage newImageWithDimensionsOf(BufferedImage img)
     {
         return new BufferedImage(img.getWidth(), img.getHeight(),
